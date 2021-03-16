@@ -1,22 +1,27 @@
 package comands;
 
 import collection.Vehicle;
+import utility.CollectionEditor;
 
 import java.util.Collection;
 
 public class CommandClear implements Command {
 
-    private Collection<Vehicle> collection;
 
-    public CommandClear(Collection<Vehicle> collection){
-        this.collection = collection;
+    private CollectionEditor collectionEditor;
 
+    public CommandClear(CollectionEditor collectionEditor) {
+        this.collectionEditor = collectionEditor;
     }
 
     @Override
     public String execute() {
-        collection.clear();
-        return "Collection was cleaned\n";
+        if (collectionEditor.isCollectionEmpty()) {
+            return "Collection is already empty\n";
+        } else {
+            collectionEditor.cleanCollection();
+            return "Collection successfully was cleaned (⌒‿⌒)\n";
+        }
     }
 
     @Override

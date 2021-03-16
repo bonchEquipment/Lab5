@@ -1,6 +1,7 @@
 package comands;
 
 import collection.Vehicle;
+import utility.CollectionEditor;
 
 import java.util.Collection;
 
@@ -10,39 +11,21 @@ import java.util.Collection;
  */
 public class CommandShow implements Command {
 
-    private Collection<Vehicle> collection;
+    private CollectionEditor collectionEditor;
 
-    public CommandShow(Collection<Vehicle> collection) {
-        this.collection = collection;
+    public CommandShow(CollectionEditor collectionEditor) {
+        this.collectionEditor = collectionEditor;
     }
 
     /**
-     *
      * @return information about all elements in the collection or says that collection is empty if it is
      */
     @Override
     public String execute() {
-        if (collection.isEmpty()) {
-            return "Collection is empty";
-        } else {
-            String res = "Collection of vehicle: ";
-            for (Vehicle collectionElement : collection) {
-               res +=  "\nname          | " + collectionElement.getName() +
-                       "\nid            | " + collectionElement.getId() +
-                       "\nxCoordinate   | " + collectionElement.getCoordinates().getX() +
-                       "\nyCoordinate   | " + collectionElement.getCoordinates().getY() +
-                       "\nenginePower   | " + collectionElement.getEnginePower() +
-                       "\nVehicleType   | " + collectionElement.getType() +
-                       "\nFuelType      | " + collectionElement.getFuelType() +
-                       "\n--------------------------";
-
-            }
-            return res;
-        }
+        return collectionEditor.getStringInerpretationOfCollection();
     }
 
     /**
-     *
      * @return description of a command
      */
     @Override

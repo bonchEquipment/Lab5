@@ -10,44 +10,40 @@ import java.io.*;
 /**
  * Operates the file for saving/reading collection.
  */
-public class FileManager {
+public class FileManager<T> {
 
-   final String path = System.getenv("LAB5.2");
+    final String path = System.getenv("LAB5");
 
-
-    private BufferedInputStream reader;
-    private BufferedWriter writer;
-    private Gson gson = new Gson();
-    private Collection<Vehicle> collection;
+    private Collection<T> collection;
 
     /**
-     * @throws IOException if file path is wrong
+     * @param collection with which the class will work
      */
-    public FileManager(Collection<Vehicle> collection) {
+    public FileManager(Collection<T> collection) {
         this.collection = collection;
     }
 
     /**
      * @throws IOException if file for saving is missing or damaged
      */
-    public void saveCollectionInFile() throws IOException {
-        writer = new BufferedWriter(new FileWriter(path));
+    public void saveCollectionInFile(Collection<T> collection) throws IOException {
+        Gson gson = new Gson();
+        BufferedWriter writer = new BufferedWriter(new FileWriter(path));
         writer.write(gson.toJson(collection));
         writer.close();
-
+        //а вот если в конструктор передавать collection и позже использовать его тут, ничего не работает(((
     }
 
     /**
      * @return LinkedList read from a file
      * @throws IOException only if jsonToString method throw it
      */
-    public LinkedList<Vehicle> readCollection() throws IOException {
-        LinkedList<Vehicle> list;
+    public LinkedList<T> readCollection() throws IOException {
+        LinkedList<T> list;
         String stringInterpretationOfJson = this.jsonToString();
-        list = gson.fromJson(stringInterpretationOfJson, new TypeToken<LinkedList<Vehicle>>() {
+        Gson gson = new Gson();
+        list = gson.fromJson(stringInterpretationOfJson, new TypeToken<LinkedList<Vehicle>>() {//!!!!ахуеть, тут если вместо Vehicle вставить T тебя в рантайме пошлют!!!!
         }.getType());
-
-        reader.close();
         return list;
     }
 
@@ -57,18 +53,17 @@ public class FileManager {
      */
     private String jsonToString() throws IOException {
         String jsonText = "";
-        reader = new BufferedInputStream(new FileInputStream(path));
+        BufferedInputStream reader = new BufferedInputStream(new FileInputStream(path));
         int i;
         while ((i = reader.read()) != -1) {
             jsonText += String.valueOf((char) i);
         }
         reader.close();
-
         return jsonText;
     }
 
     public void clear() throws IOException {
-        writer = new BufferedWriter(new FileWriter(path));
+        BufferedWriter writer = new BufferedWriter(new FileWriter(path));
         writer.write("");
         writer.close();
     }
@@ -80,4 +75,5 @@ public class FileManager {
     public String toString() {
         return "FileManager object for working with file " + path;
     }
+
 }

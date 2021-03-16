@@ -3,9 +3,8 @@ package collection;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 
-public class Vehicle implements Comparable<Vehicle> {
+public class Vehicle extends IdHolder implements Comparable<Vehicle> {
 
-    private Integer id; //Поле не может быть null, Значение поля должно быть больше 0, Значение этого поля должно быть уникальным, Значение этого поля должно генерироваться автоматически
     private String name; //Поле не может быть null, Строка не может быть пустой
     private Coordinates coordinates; //Поле не может быть null
     private String creationDate;//Поле не может быть null, Значение этого поля должно генерироваться автоматически
@@ -14,7 +13,7 @@ public class Vehicle implements Comparable<Vehicle> {
     private FuelType fuelType; //Поле не может быть null
 
     public Vehicle(Integer id, String name, float xCoordinate, float yCoordinate, float enginePower, VehicleType type, FuelType fuelType) {
-        this.id = id;
+        super(id);
         this.name = name;
         this.enginePower = enginePower;
         this.type = type;
@@ -35,14 +34,6 @@ public class Vehicle implements Comparable<Vehicle> {
 
     public int compareTo(Vehicle o) {
         return this.getId() - o.getId();
-    }
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
     }
 
     public String getName() {

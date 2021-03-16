@@ -2,15 +2,16 @@ package comands;
 
 
 import collection.Vehicle;
+import utility.CollectionEditor;
 
 import java.util.Collection;
 
 public class CommandPrintFieldDescendingFuelType implements Command {
 
-    private Collection<Vehicle> collection;
+    private CollectionEditor collectionEditor;
 
-    public CommandPrintFieldDescendingFuelType(Collection<Vehicle> collection) {
-        this.collection = collection;
+    public CommandPrintFieldDescendingFuelType(CollectionEditor collectionEditor) {
+        this.collectionEditor = collectionEditor;
     }
 
     /**
@@ -18,15 +19,7 @@ public class CommandPrintFieldDescendingFuelType implements Command {
      */
     @Override
     public String execute() {
-        String res = "fuel Type field values of all elements in descending order:\n";
-        for (int maxOrdinalAtTheMoment = 4; maxOrdinalAtTheMoment >= 0; maxOrdinalAtTheMoment--){
-            for (Vehicle collectionElement : collection) {
-                if (collectionElement.getFuelType().ordinal() == maxOrdinalAtTheMoment){
-                    res += collectionElement.getFuelType().toString() + "\n";
-                }
-            }
-        }
-        return res;
+       return collectionEditor.getTheFuelTypeFieldValuesInDescendingOrder();
     }
 
     @Override

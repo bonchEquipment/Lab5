@@ -3,6 +3,9 @@ package comands;
 import java.util.List;
 
 public class CommandHelp implements Command {
+    private final List<Command> commandsAvailable;
+
+
     public CommandHelp(List<Command> commandsAvailable) {
         this.commandsAvailable = commandsAvailable;
         this.commandsAvailable.add(0, this);
@@ -22,5 +25,5 @@ public class CommandHelp implements Command {
         return "display help for the available commands";
     }
 
-    private final List<Command> commandsAvailable;
+
 }

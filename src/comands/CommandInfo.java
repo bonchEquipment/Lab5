@@ -1,38 +1,22 @@
 package comands;
 
 import collection.Vehicle;
+import utility.CollectionEditor;
 
 import java.time.format.DateTimeFormatter;
 import java.util.Collection;
 import java.util.List;
 
 public class CommandInfo implements Command {
-    private final List<Vehicle> list;
+    private CollectionEditor collectionEditor;
 
-    public CommandInfo(List<Vehicle> list) {
-        this.list = list;
+    public CommandInfo(CollectionEditor collectionEditor) {
+        this.collectionEditor = collectionEditor;
     }
-
 
     @Override
     public String execute() {
-        if (list.isEmpty()){
-            return "collection is empty\n"+
-                    "type of collection:\n" +
-                    list.getClass().getTypeName();
-        } else {
-            int size = list.size();
-            String initializationDate = DateTimeFormatter.ISO_DATE_TIME.format(list.get(0).getCreationDate());
-            String type = list.getClass().getTypeName();
-            String res = "";
-            res += "information about collection:\n" +
-                    "size                 | " + size +
-                    "\ninitializationDate   | " + initializationDate +
-                    "\nType of collection   | " + type +
-                    "\n";
-            return res;
-        }
-
+      return collectionEditor.getInformationAboutCollection();
     }
 
     @Override
