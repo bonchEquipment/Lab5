@@ -1,6 +1,7 @@
 package collection;
 
 public class Coordinates {
+
     public Coordinates(float x,float y) {
         this.x = x;
         this.y = y;

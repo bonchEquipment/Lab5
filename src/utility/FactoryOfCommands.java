@@ -1,10 +1,10 @@
 package utility;
 
 import collection.Vehicle;
-import comands.*;
+import com.google.gson.reflect.TypeToken;
+import commands.*;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.LinkedList;
 
 public class FactoryOfCommands {
@@ -13,9 +13,9 @@ public class FactoryOfCommands {
 
     public ArrayList<Command> getCommandList() {
         try {
-
+            String.valueOf(12);
             LinkedList<Vehicle> list = new LinkedList<>();
-            FileManager<Vehicle> fileManager = new FileManager<>(list);
+            FileManager<Vehicle> fileManager = new FileManager<Vehicle>(list, new TypeToken<LinkedList<Vehicle>>(){}.getType());
             list = fileManager.readCollection();
             CollectionEditor collectionEditor = new CollectionEditor(list);
 
@@ -31,6 +31,10 @@ public class FactoryOfCommands {
             Command removeGrater = new CommandRemoveGrater(collectionEditor);
             Command removeLast = new CommandRemoveLast(collectionEditor);
             Command countByType = new CommandCountByType(collectionEditor);
+            Command removeLower = new CommandRemoveLower(collectionEditor);
+            Command add = new CommandAdd(collectionEditor);
+            Command update = new CommandUpdate(collectionEditor);
+            Command execute_script = new CommandExecuteScript(collectionEditor);
             commandsList.add(commandPrintFieldDescendingFuelType);
             commandsList.add(clear);
             commandsList.add(help);
@@ -43,6 +47,10 @@ public class FactoryOfCommands {
             commandsList.add(removeGrater);
             commandsList.add(removeLast);
             commandsList.add(countByType);
+            commandsList.add(removeLower);
+            commandsList.add(add);
+            commandsList.add(update);
+            commandsList.add(execute_script);
         } catch (Exception e) {
             e.printStackTrace();
         }

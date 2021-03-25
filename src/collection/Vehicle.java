@@ -1,7 +1,10 @@
 package collection;
 
+import java.io.PrintStream;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Arrays;
+import java.util.Scanner;
 
 public class Vehicle extends IdHolder implements Comparable<Vehicle> {
 
@@ -9,19 +12,156 @@ public class Vehicle extends IdHolder implements Comparable<Vehicle> {
     private Coordinates coordinates; //Поле не может быть null
     private String creationDate;//Поле не может быть null, Значение этого поля должно генерироваться автоматически
     private float enginePower; //Значение поля должно быть больше 0
-    private VehicleType type; //Поле может быть null
+    private VehicleType vehicleType; //Поле может быть null
     private FuelType fuelType; //Поле не может быть null
 
     public Vehicle(Integer id, String name, float xCoordinate, float yCoordinate, float enginePower, VehicleType type, FuelType fuelType) {
         super(id);
         this.name = name;
         this.enginePower = enginePower;
-        this.type = type;
+        this.vehicleType = type;
         this.fuelType = fuelType;
         this.setCreationDate(ZonedDateTime.now());
         coordinates = new Coordinates(xCoordinate, yCoordinate);
+    }
 
 
+    public Vehicle(Integer id, PrintStream out, Scanner scanner) {
+        super(id);
+        this.coordinates = new Coordinates(0, 0);
+        setNameUsingUserInput(out, scanner);
+        setXCoordinateUsingUserInput(out, scanner);
+        setYCoordinateUsingUserInput(out, scanner);
+        setEnginePowerUsingUserInput(out, scanner);
+        setVehicleTypeUsingUserInput(out, scanner);
+        setFuelTypeUsingUserInput(out, scanner);
+        this.setCreationDate(ZonedDateTime.now());
+    }
+
+
+    private void setNameUsingUserInput(PrintStream out, Scanner scanner) {
+        while (true) {
+            out.print("name: ");
+            this.name = scanner.nextLine();
+            if (name.length() == 0) {
+                out.println("vehicle can't be nameless");
+                continue;
+            }
+            break;
+        }
+    }
+
+    private void setXCoordinateUsingUserInput(PrintStream out, Scanner scanner) {
+        while (true) {
+            String coordinateXInString = "";
+            try {
+                out.print("x: ");
+                coordinateXInString = scanner.nextLine();
+                float coordinateX = Float.parseFloat(coordinateXInString);
+                this.coordinates.setX(coordinateX);
+                if (this.coordinates.getX() <= -958) {
+                    out.println("Expected X to be greater than -958");
+                    continue;
+                }
+                break;
+            } catch (NumberFormatException e) {
+                if (coordinateXInString.length() == 0) {
+                    out.println("you didn't enter a coordinate, try better");
+                } else {
+                    out.println("wrong number format \"" + coordinateXInString + "\""); //а почему я в catch не могу использовать variable из try?????
+                }
+            }
+        }
+
+    }
+
+    private void setYCoordinateUsingUserInput(PrintStream out, Scanner scanner) {
+        while (true) {
+            String coordinateYInString = "";
+            try {
+                out.print("y: ");
+                coordinateYInString = scanner.nextLine();
+                float coordinateY = Float.parseFloat(coordinateYInString);
+                this.coordinates.setY(coordinateY);
+                break;
+            } catch (NumberFormatException e) {
+                if (coordinateYInString.length() == 0) {
+                    out.println("you didn't enter a coordinate, try better");
+                } else {
+                    out.println("wrong number format \"" + coordinateYInString + "\""); //а почему я в catch не могу использовать variable из try?????
+                }
+            }
+        }
+    }
+
+    private void setEnginePowerUsingUserInput(PrintStream out, Scanner scanner) {
+        while (true) {
+            String enginePowerInString = "";
+            try {
+                out.print("enginePower: ");
+                enginePowerInString = scanner.nextLine();
+                float enginePower = Float.parseFloat(enginePowerInString);
+                setEnginePower(enginePower);
+                if (getEnginePower() < 0) {
+                    out.println("Expected engine power to be greater than 0");
+                    continue;
+                }
+                break;
+            } catch (NumberFormatException e) {
+                if (enginePowerInString.length() == 0) {
+                    out.println("you didn't enter an engine power, try better");
+                } else {
+                    out.println("wrong number format \"" + enginePowerInString + "\""); //а почему я в catch не могу использовать variable из try?????
+                }
+            }
+        }
+    }
+
+    private void setVehicleTypeUsingUserInput(PrintStream out, Scanner scanner) {
+        while (true) {
+            String vehicleTypeInString = "";
+            try {
+                String tip = getEnumTip(VehicleType.class.getEnumConstants());
+                out.print("type (" + tip + "): ");
+                vehicleTypeInString = scanner.nextLine();
+                VehicleType type = VehicleType.valueOf(vehicleTypeInString.toUpperCase());
+                setType(type);
+                break;
+            } catch (IllegalArgumentException e) {
+                if (vehicleTypeInString.length() == 0) {
+                    setType(null);
+                    break;
+                    //out.println("you didn't enter a vehicle type, try better");
+                } else {
+                    out.println("wrong vehicle type format \"" + vehicleTypeInString + "\""); //а почему я в catch не могу использовать variable из try?????
+                }
+            }
+        }
+    }
+
+    private void setFuelTypeUsingUserInput(PrintStream out, Scanner scanner) {
+        while (true) {
+            String fuelTypeInString = "";
+            try {
+                String fuelTip = getEnumTip(FuelType.class.getEnumConstants());
+                out.print("fuelTip (" + fuelTip + "): ");
+                fuelTypeInString = scanner.nextLine();
+                FuelType type = FuelType.valueOf(fuelTypeInString.toUpperCase());
+                setFuelType(type);
+                break;
+            } catch (IllegalArgumentException e) {
+                if (fuelTypeInString.length() == 0) {
+                    out.println("you didn't enter a fuel type, try better");
+                } else {
+                    out.println("wrong fuel type format \"" + fuelTypeInString + "\""); //а почему я в catch не могу использовать variable из try?????
+                }
+            }
+        }
+    }
+
+
+    private String getEnumTip(Enum[] constants) {
+        return Arrays.stream(constants).map(Enum::toString).reduce((a, b) -> a + " | " + b).get();
     }
 
     public ZonedDateTime getCreationDate() {
@@ -29,7 +169,7 @@ public class Vehicle extends IdHolder implements Comparable<Vehicle> {
     }
 
     public void setCreationDate(ZonedDateTime creationDate) {
-       this.creationDate = DateTimeFormatter.ISO_DATE_TIME.format(creationDate);
+        this.creationDate = DateTimeFormatter.ISO_DATE_TIME.format(creationDate);
     }
 
     public int compareTo(Vehicle o) {
@@ -61,11 +201,11 @@ public class Vehicle extends IdHolder implements Comparable<Vehicle> {
     }
 
     public VehicleType getType() {
-        return type;
+        return vehicleType;
     }
 
     public void setType(VehicleType type) {
-        this.type = type;
+        this.vehicleType = type;
     }
 
     public FuelType getFuelType() {
