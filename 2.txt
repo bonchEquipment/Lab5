@@ -1,4 +1,18 @@
 show
 show
-execute_script ScriptFile1.txt
+execute_script ScriptFile.txt
 help
+add
+woooooow
+100
+100
+100
+
+plasma
+show
+show
+123123123
+exit
+
+add
+11

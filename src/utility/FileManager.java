@@ -29,16 +29,12 @@ public class FileManager<T> {
     /**
      * @throws IOException if file for saving is missing or damaged
      */
-    public void saveCollectionInFile(Collection<T> collection) {
-        try {
+    //здесь можно попробовать проверять File на всякие интересные штуки
+    public void saveCollectionInFile(Collection<T> collection) throws IOException{
             Gson gson = new Gson();
             BufferedWriter writer = new BufferedWriter(new FileWriter(path));
             writer.write(gson.toJson(collection));
             writer.close();
-        } catch (IOException e){
-            outputSystem.showMessage("you have no right to write to the file");
-            System.exit(0);
-        }
         //а вот если в конструктор передавать collection и позже использовать его тут, ничего не работает(((
     }
 
@@ -46,14 +42,12 @@ public class FileManager<T> {
      * @return LinkedList read from a file
      * @throws IOException only if jsonToString method throw it
      */
-    public LinkedList<T> readCollection()  {
-        LinkedList<T> list = null;
+    public LinkedList<T> readCollection() throws IOException{
+            LinkedList<T> list;
             String stringInterpretationOfJson = this.jsonToString();
             Gson gson = new Gson();
             list = gson.fromJson(stringInterpretationOfJson, type);
-//new TypeToken<LinkedList<Vehicle>>(){}.getType()
-
-            outputSystem.showMessage("you have no right to read the file");
+            //new TypeToken<LinkedList<Vehicle>>(){}.getType()
         return list;
     }
 
@@ -61,20 +55,14 @@ public class FileManager<T> {
      * @return String interpretation of json file
      * @throws IOException if BufferedInputStream object can't read
      */
-    private String jsonToString(){
+    private String jsonToString() throws IOException{
         String jsonText = "";
-        try {
             BufferedInputStream reader = new BufferedInputStream(new FileInputStream(path));
             int i;
-            while ((i = reader.read()) != -1) {
+        while ((i = reader.read()) != -1) {
                 jsonText += String.valueOf((char) i);
             }
             reader.close();
-
-        } catch (java.lang.NullPointerException| IOException e){
-            outputSystem.showMessage("you have no right to read the file");
-            System.exit(0);
-        }
         return jsonText;
     }
 
@@ -91,10 +79,5 @@ public class FileManager<T> {
     public String toString() {
         return "FileManager object for working with file " + path;
     }
-
-    @FunctionalInterface
-    public interface TypeTokenFactory {
-        Type createTypeToken();
-    }
-
+    
 }

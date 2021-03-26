@@ -2,6 +2,8 @@ package commands;
 
 import utility.*;
 
+import java.io.IOException;
+
 public class CommandSave implements Command {
 
     private FileManager fileManager;
@@ -19,8 +21,12 @@ public class CommandSave implements Command {
      * @return nothing or message about error if unable to save
      */
     public String execute() {
+        try {
             fileManager.saveCollectionInFile(collectionEditor.getCollection());
-            return "collection was saved";
+        } catch (IOException e){
+
+        }
+        return "collection was saved";
     }
 
     /**

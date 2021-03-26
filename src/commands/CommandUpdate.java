@@ -11,26 +11,28 @@ public class CommandUpdate implements CommandWithArgument {
     private CollectionEditor collectionEditor;
     private String userEnteredId;
     private int id;
+    private Scanner scanner;
 
-    public CommandUpdate(CollectionEditor collectionEditor) {
+    public CommandUpdate(CollectionEditor collectionEditor, Scanner scanner) {
         this.collectionEditor = collectionEditor;
+        this.scanner = scanner;
     }
 
     @Override
     public String execute() {
         if (!isArgumentANumber(userEnteredId)) {
             return "invalid id format \"" + userEnteredId + "\", try better";
-        } else {
+        }
             try {
                 Vehicle oldVehicle = collectionEditor.getVehicleById(id);
-                Vehicle newVehicle = new Vehicle(id, System.out, new Scanner(System.in));
+                Vehicle newVehicle = new Vehicle(id, System.out, scanner);
                 newVehicle.setCreationDate(oldVehicle.getCreationDate());
                 collectionEditor.updateElement(newVehicle);
                 return "the values of the element was successfully update";
             } catch (NoElementWithSuchIdException e) {
                 return "unable to find element with id " + id;
             }
-        }
+
     }
 
     public void getArgumentFromOutside(String argument) {

@@ -7,15 +7,17 @@ import java.util.Scanner;
 
 public class CommandAdd implements Command {
 
+    private Scanner scanner;
     private CollectionEditor collectionEditor;
 
-    public CommandAdd(CollectionEditor collectionEditor) {
+    public CommandAdd(CollectionEditor collectionEditor, Scanner scanner) {
         this.collectionEditor = collectionEditor;
+        this.scanner = scanner;
     }
 
     @Override
     public String execute() {
-        Vehicle vehicle = new Vehicle(getId(), System.out, new Scanner(System.in));
+        Vehicle vehicle = new Vehicle(getId(), System.out, scanner);
         this.collectionEditor.addElement(vehicle);
         return "new element was successfully added to the collection";
     }

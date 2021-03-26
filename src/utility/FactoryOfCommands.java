@@ -4,18 +4,25 @@ import collection.Vehicle;
 import com.google.gson.reflect.TypeToken;
 import commands.*;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.LinkedList;
+import java.util.Scanner;
 
 public class FactoryOfCommands {
 
+        private Scanner scanner;
+        public FactoryOfCommands(Scanner scanner){
+                this.scanner = scanner;
+        }
+
     private ArrayList<Command> commandsList = new ArrayList<>();
 
-    public ArrayList<Command> getCommandList() {
-        try {
-            String.valueOf(12);
+    public ArrayList<Command> getCommandList() throws NullPointerException{
+
+            try{
             LinkedList<Vehicle> list = new LinkedList<>();
-            FileManager<Vehicle> fileManager = new FileManager<Vehicle>(list, new TypeToken<LinkedList<Vehicle>>(){}.getType());
+            FileManager<Vehicle> fileManager = new FileManager<>(list, new TypeToken<LinkedList<Vehicle>>(){}.getType());
             list = fileManager.readCollection();
             CollectionEditor collectionEditor = new CollectionEditor(list);
 
@@ -32,8 +39,8 @@ public class FactoryOfCommands {
             Command removeLast = new CommandRemoveLast(collectionEditor);
             Command countByType = new CommandCountByType(collectionEditor);
             Command removeLower = new CommandRemoveLower(collectionEditor);
-            Command add = new CommandAdd(collectionEditor);
-            Command update = new CommandUpdate(collectionEditor);
+            Command add = new CommandAdd(collectionEditor, scanner);
+            Command update = new CommandUpdate(collectionEditor, scanner);
             Command execute_script = new CommandExecuteScript(collectionEditor);
             commandsList.add(commandPrintFieldDescendingFuelType);
             commandsList.add(clear);
@@ -50,10 +57,10 @@ public class FactoryOfCommands {
             commandsList.add(removeLower);
             commandsList.add(add);
             commandsList.add(update);
-            commandsList.add(execute_script);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+            commandsList.add(execute_script);}
+            catch (IOException e){
+
+            }
         return commandsList;
     }
 }

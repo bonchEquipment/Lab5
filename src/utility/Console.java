@@ -9,47 +9,38 @@ import java.util.Scanner;
 
 public class Console {
 
-    private String userCommand = "";
-    private ArrayList<Command> commandsList;
-    private OutputSystem outputSystem;
+    protected String userCommand = "";
+    protected ArrayList<Command> commandsList;
+    protected OutputSystem outputSystem;
+    protected Scanner scanner;
 
-    public Console() {
-        initialize();
+    public Console(Scanner scanner) {
+        this.scanner = scanner;
+         initialize();
     }
 
 
     public void run() {
-        outputSystem.showMessage("collection was successfully load from a file");
-        try {
-            Scanner commandReader = new Scanner(System.in);
-            while (true) {
-                try {
-                    userCommand = commandReader.nextLine();
-                    if (isACommand(userCommand)) {
-                        executeCommand(userCommand);
-                    } else {
-                        outputSystem.showMessage("no such command \"" + userCommand +
-                                "\" type \"help\" to see commands available");
-                    }
-                } catch (NoSuchElementException e) {
-                    outputSystem.showMessage("don't press ctrl + d  pls");
-                }
+        while (scanner.hasNext()) {
+            userCommand = scanner.nextLine();
+            if (isACommand(userCommand)) {
+                executeCommand(userCommand);
+            } else {
+                outputSystem.showMessage("no such command \"" + userCommand +
+                        "\" type \"help\" to see commands available");
             }
-        } 
+        }
     }
-
 
     public void initialize() { //на самом деле ошибка тут не ловится и у меня нет ни одного объяснения почему
         try {
             outputSystem = new OutputSystem();
-            FactoryOfCommands factoryOfCommands = new FactoryOfCommands();
+            FactoryOfCommands factoryOfCommands = new FactoryOfCommands(scanner);
             commandsList = new ArrayList<>();
             commandsList = factoryOfCommands.getCommandList();
-            // outputSystem.showMessage("collection was successfully load from a file");
-        } catch (Exception e) {
-            //outputSystem.showMessage("unable to load collection from a file");
-
-            //System.exit(0);
+            outputSystem.showMessage("collection was successfully load from a file");
+        } catch (NullPointerException e) {
+            outputSystem.showMessage("unable to load collection from a file");
         }
     }
 
