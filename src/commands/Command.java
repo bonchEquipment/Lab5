@@ -3,19 +3,18 @@ package commands;
 public interface Command {
 
     /**
-     *
+     * the main method of the class, doing whatever that needs to be done
      * @return String instruction of what the output system should show
      */
     public String execute();
 
     /**
-     *
-     * @return String information about command
+     * String information about command
      */
     public String getDescription();
 
     /**
-     * commands.CommandFooBar => "foo_bar"
+     * transforms commands.CommandFooBar to "foo_bar"
      */
     default String getName() {
         int idx = ("Command").length();

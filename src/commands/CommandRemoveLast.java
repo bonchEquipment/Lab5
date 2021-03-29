@@ -2,6 +2,9 @@ package commands;
 
 import utility.CollectionEditor;
 
+/**
+ * remove the last element of the collection
+ */
 public class CommandRemoveLast implements Command {
 
     private CollectionEditor collectionEditor;

@@ -1,5 +1,8 @@
 package commands;
 
+/**
+ * ends the program
+ */
 public class CommandExit implements Command{
 
     @Override

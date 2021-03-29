@@ -2,8 +2,10 @@ package commands;
 
 import utility.CollectionEditor;
 
+/**
+ * deleting all elements from the collection
+ */
 public class CommandClear implements Command {
-
 
     private CollectionEditor collectionEditor;
 

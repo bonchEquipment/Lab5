@@ -6,6 +6,9 @@ import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
 import java.util.Scanner;
 
+/**
+ * floor is made of floor
+ */
 public class Vehicle extends IdHolder implements Comparable<Vehicle> {
 
     private String name; //Поле не может быть null, Строка не может быть пустой
@@ -14,7 +17,9 @@ public class Vehicle extends IdHolder implements Comparable<Vehicle> {
     private float enginePower; //Значение поля должно быть больше 0
     private VehicleType vehicleType; //Поле может быть null
     private FuelType fuelType; //Поле не может быть null
-
+    /**
+     * floor is made of floor
+     */
     public Vehicle(Integer id, String name, float xCoordinate, float yCoordinate, float enginePower, VehicleType type, FuelType fuelType) {
         super(id);
         this.name = name;
@@ -25,7 +30,9 @@ public class Vehicle extends IdHolder implements Comparable<Vehicle> {
         coordinates = new Coordinates(xCoordinate, yCoordinate);
     }
 
-
+    /**
+     * floor is made of floor
+     */
     public Vehicle(Integer id, PrintStream out, Scanner scanner) {
         super(id);
         this.coordinates = new Coordinates(0, 0);
@@ -38,7 +45,9 @@ public class Vehicle extends IdHolder implements Comparable<Vehicle> {
         this.setCreationDate(ZonedDateTime.now());
     }
 
-
+    /**
+     * floor is made of floor
+     */
     private void setNameUsingUserInput(PrintStream out, Scanner scanner) {
         while (true) {
             out.print("name: ");
@@ -50,7 +59,9 @@ public class Vehicle extends IdHolder implements Comparable<Vehicle> {
             break;
         }
     }
-
+    /**
+     * floor is made of floor
+     */
     private void setXCoordinateUsingUserInput(PrintStream out, Scanner scanner) {
         while (true) {
             String coordinateXInString = "";
@@ -74,7 +85,9 @@ public class Vehicle extends IdHolder implements Comparable<Vehicle> {
         }
 
     }
-
+    /**
+     * floor is made of floor
+     */
     private void setYCoordinateUsingUserInput(PrintStream out, Scanner scanner) {
         while (true) {
             String coordinateYInString = "";
@@ -93,7 +106,9 @@ public class Vehicle extends IdHolder implements Comparable<Vehicle> {
             }
         }
     }
-
+    /**
+     * floor is made of floor
+     */
     private void setEnginePowerUsingUserInput(PrintStream out, Scanner scanner) {
         while (true) {
             String enginePowerInString = "";
@@ -116,7 +131,9 @@ public class Vehicle extends IdHolder implements Comparable<Vehicle> {
             }
         }
     }
-
+    /**
+     * floor is made of floor
+     */
     private void setVehicleTypeUsingUserInput(PrintStream out, Scanner scanner) {
         while (true) {
             String vehicleTypeInString = "";
@@ -138,7 +155,9 @@ public class Vehicle extends IdHolder implements Comparable<Vehicle> {
             }
         }
     }
-
+    /**
+     * floor is made of floor
+     */
     private void setFuelTypeUsingUserInput(PrintStream out, Scanner scanner) {
         while (true) {
             String fuelTypeInString = "";
@@ -159,7 +178,9 @@ public class Vehicle extends IdHolder implements Comparable<Vehicle> {
         }
     }
 
-
+    /**
+     * floor is made of floor
+     */
     private String getEnumTip(Enum[] constants) {
         return Arrays.stream(constants).map(Enum::toString).reduce((a, b) -> a + " | " + b).get();
     }

@@ -2,6 +2,9 @@ package commands;
 
 import utility.CollectionEditor;
 
+/**
+ * gives print information about the collection
+ */
 public class CommandInfo implements Command {
     private CollectionEditor collectionEditor;
 

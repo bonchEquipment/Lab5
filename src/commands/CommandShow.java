@@ -2,7 +2,6 @@ package commands;
 
 import utility.CollectionEditor;
 
-
 /**
  * class for command "show" realization
  */
@@ -19,7 +18,7 @@ public class CommandShow implements Command {
      */
     @Override
     public String execute() {
-        return collectionEditor.getStringInerpretationOfCollection();
+        return collectionEditor.getStringInterpretationOfCollection();
     }
 
     /**

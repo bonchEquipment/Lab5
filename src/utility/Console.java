@@ -4,22 +4,31 @@ import commands.*;
 import exceptions.NoArgumentsInUserCommandException;
 
 import java.util.ArrayList;
-import java.util.NoSuchElementException;
 import java.util.Scanner;
 
+/**
+ * class that invokes commands
+ */
 public class Console {
 
-    protected String userCommand = "";
+    protected String userCommand;
     protected ArrayList<Command> commandsList;
-    protected OutputSystem outputSystem;
+    protected AbstractOutputSystem outputSystem;
     protected Scanner scanner;
 
     public Console(Scanner scanner) {
         this.scanner = scanner;
-         initialize();
+        userCommand = "";
+        outputSystem = new ConsoleOutputSystem();
+        FactoryOfCommands factoryOfCommands = new FactoryOfCommands();
+        commandsList = new ArrayList<>();
+        commandsList = factoryOfCommands.getCommandList(scanner);
+        outputSystem.showMessage(factoryOfCommands.getStatusOfLoadFile());
     }
 
-
+    /**
+     * launch point
+     */
     public void run() {
         while (scanner.hasNext()) {
             userCommand = scanner.nextLine();
@@ -32,18 +41,12 @@ public class Console {
         }
     }
 
-    public void initialize() { //на самом деле ошибка тут не ловится и у меня нет ни одного объяснения почему
-        try {
-            outputSystem = new OutputSystem();
-            FactoryOfCommands factoryOfCommands = new FactoryOfCommands(scanner);
-            commandsList = new ArrayList<>();
-            commandsList = factoryOfCommands.getCommandList();
-            outputSystem.showMessage("collection was successfully load from a file");
-        } catch (NullPointerException e) {
-            outputSystem.showMessage("unable to load collection from a file");
-        }
-    }
-
+    /**
+     * method for executing any command
+     * takes any string as a parameter, so it can be some invalid command as well
+     *
+     * @param userCommand
+     */
     public void executeCommand(String userCommand) {
         Command commandForExecution;
         String argument;
@@ -64,7 +67,11 @@ public class Console {
 
     }
 
-
+    /**
+     * says whether entered string is a command or not
+     *
+     * @param usersString
+     */
     public boolean isACommand(String usersString) {
         boolean isACommand = false;
         String[] words = usersString.trim().toLowerCase().split(" ");
@@ -83,6 +90,12 @@ public class Console {
         return isACommand;
     }
 
+    /**
+     * extracts an argument from the entered string
+     * (you entered remove_by_id 911, get 911)
+     * @param inputString
+     * @throws NoArgumentsInUserCommandException
+     */
     public String getArgumentFromUsersInputString(String inputString) throws NoArgumentsInUserCommandException {
         String argument;
         String[] words = inputString.trim().toLowerCase().split(" ");
@@ -94,6 +107,12 @@ public class Console {
         return argument;
     }
 
+    /**
+     * converts string to instance of command
+     * (you entered remove_last, get new CommandRemoveLast)
+     * @param futureCommand is a String so you possible can enter any command
+     * @return command if such command exist or CommandExit if there is no such command
+     */
     public Command getCommandFromString(String futureCommand) {
         String[] words = futureCommand.trim().toLowerCase().split(" ");
         futureCommand = words[0];

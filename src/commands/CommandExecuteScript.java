@@ -1,42 +1,52 @@
 package commands;
 
-import collection.Coordinates;
-import collection.FuelType;
-import collection.Vehicle;
-import collection.VehicleType;
-import exceptions.NoArgumentsInUserCommandException;
 import utility.CollectionEditor;
 import utility.Console;
-import utility.OutputSystem;
+import utility.ConsoleOutputSystem;
 
 import java.io.*;
 import java.nio.file.Paths;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collection;
 import java.util.Scanner;
 
+/**
+ * reads and executes a script from the specified file
+ */
 public class CommandExecuteScript implements CommandWithArgument {
     private CollectionEditor collectionEditor;
     private String userEnteredPath;
-    private OutputSystem outputSystem;
+    private ConsoleOutputSystem outputSystem;
     private Collection<String> paths;
 
 
     public CommandExecuteScript(CollectionEditor collectionEditor) {
         this.collectionEditor = collectionEditor;
-        this.outputSystem = new OutputSystem();
+        this.outputSystem = new ConsoleOutputSystem();
         this.paths = new ArrayList<>();
     }
 
+    /**
+     * using the same method that running whole program (method run() of Console)
+     * but instead of reading from user input reads from a file
+     * <p>
+     * without creating an anon class method would looke like
+     * <p>
+     * if (!isFileExits(userEnteredPath)) { return "Invalid file path specified"; }
+     * Console console = new Console();
+     * console.run();
+     * return "";
+     * <p>
+     * but to defend myself from a recursion I need to add 4 lines of code
+     * to the method run(), so I'm overriding the hole method and creating anon class
+     */
     @Override
     public String execute() {
         if (!isFileExits(userEnteredPath)) {
             return "Invalid file path specified";
         }
 
-//можно отдельно создать переопределенную консоль,  а потом уже отдать сюда
-        //вот тут нужен комментарий с пояснением, зачем я дописываю run()
+
         try {
             Console console = new Console(new Scanner(Paths.get(userEnteredPath))) {
                 @Override
@@ -100,7 +110,6 @@ public class CommandExecuteScript implements CommandWithArgument {
     }
 
 
-    //эта штука работает, определенно, я это проверил (а вообще хорошо бы тестики писать для этого)
     private boolean isLineAScriptWithRecursion(String line) {
         String[] words = line.split(" ");
         if (words.length == 2) {
@@ -111,7 +120,6 @@ public class CommandExecuteScript implements CommandWithArgument {
         return false;
     }
 
-    //окей, проверил, это работает
     private boolean isStringCollectionHaveSameElements(Collection<String> collection) {
         String[] mass = new String[1];
         String[] array = collection.toArray(mass);

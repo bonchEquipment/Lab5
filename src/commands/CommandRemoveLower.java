@@ -2,6 +2,9 @@ package commands;
 
 import utility.CollectionEditor;
 
+/**
+ * remove all elements with lower id
+ */
 public class CommandRemoveLower implements CommandWithArgument {
     private CollectionEditor collectionEditor;
     private String userEnteredId;

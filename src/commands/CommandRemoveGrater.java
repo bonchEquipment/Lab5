@@ -2,6 +2,9 @@ package commands;
 
 import utility.CollectionEditor;
 
+/**
+ * remove all elements with grater id
+ */
 public class CommandRemoveGrater implements CommandWithArgument {
     private CollectionEditor collectionEditor;
     private String userEnteredId;

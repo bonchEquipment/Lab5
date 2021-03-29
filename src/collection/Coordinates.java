@@ -1,11 +1,15 @@
 package collection;
 
+/**
+ * class for pointing the location of an object in space
+ */
 public class Coordinates {
 
-    public Coordinates(float x,float y) {
+    public Coordinates(float x, float y) {
         this.x = x;
         this.y = y;
     }
+
     private Float x; //Значение поля должно быть больше -958, Поле не может быть null
     private Float y; //Поле не может быть null
 

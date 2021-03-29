@@ -3,11 +3,6 @@ add
 1
 1
 1
-
-
-s
+chopper
 plasma
-
 show
-info
-help

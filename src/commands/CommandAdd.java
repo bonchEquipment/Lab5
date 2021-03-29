@@ -5,6 +5,9 @@ import utility.CollectionEditor;
 
 import java.util.Scanner;
 
+/**
+ * command that adding new element to the collection
+ */
 public class CommandAdd implements Command {
 
     private Scanner scanner;

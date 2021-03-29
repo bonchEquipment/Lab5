@@ -3,9 +3,11 @@ package commands;
 import collection.Vehicle;
 import exceptions.NoElementWithSuchIdException;
 import utility.CollectionEditor;
-
 import java.util.Scanner;
 
+/**
+ * updating element with the specified id
+ */
 public class CommandUpdate implements CommandWithArgument {
 
     private CollectionEditor collectionEditor;

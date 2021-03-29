@@ -3,6 +3,9 @@ package commands;
 import collection.VehicleType;
 import utility.CollectionEditor;
 
+/**
+ * show the number of elements with the same vehicle type
+ */
 public class CommandCountByType implements CommandWithArgument {
     private CollectionEditor collectionEditor;
     private String userEnteredType;
@@ -10,7 +13,6 @@ public class CommandCountByType implements CommandWithArgument {
     public CommandCountByType(CollectionEditor collectionEditor) {
         this.collectionEditor = collectionEditor;
     }
-
 
     public void getArgumentFromOutside(String argument) {
         userEnteredType = argument;
@@ -23,7 +25,7 @@ public class CommandCountByType implements CommandWithArgument {
             userEnteredType = userEnteredType.toUpperCase();
             VehicleType vehicleType = getTypeFromString(userEnteredType);
             AmountOfElementsWithTheSameTime = collectionEditor.getAmountOfElementWithType(vehicleType);
-            return  "There is " + String.valueOf(AmountOfElementsWithTheSameTime) +
+            return "There is " + String.valueOf(AmountOfElementsWithTheSameTime) +
                     " elements with the type " + userEnteredType.toUpperCase();
         } else {
             return "you wrote a wrong type \"" + userEnteredType + "\", try better";
@@ -48,7 +50,6 @@ public class CommandCountByType implements CommandWithArgument {
     private VehicleType getTypeFromString(String type) {
         return VehicleType.valueOf(type);
     }
-
 
     public String getSyntacticsExample() {
         return "" + getName() + " type\n" +

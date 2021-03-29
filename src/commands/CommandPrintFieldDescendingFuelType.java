@@ -3,6 +3,9 @@ package commands;
 
 import utility.CollectionEditor;
 
+/**
+ * print the fuel Type field values of all elements in descending order
+ */
 public class CommandPrintFieldDescendingFuelType implements Command {
 
     private CollectionEditor collectionEditor;

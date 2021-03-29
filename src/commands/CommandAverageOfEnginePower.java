@@ -2,6 +2,9 @@ package commands;
 
 import utility.CollectionEditor;
 
+/**
+ * count an average engine power of all vehicle in a collection
+ */
 public class CommandAverageOfEnginePower implements Command {
 
     private CollectionEditor collectionEditor;

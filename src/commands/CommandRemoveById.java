@@ -2,6 +2,9 @@ package commands;
 
 import utility.CollectionEditor;
 
+/**
+ * remove elements from the collection by id
+ */
 public class CommandRemoveById implements CommandWithArgument {
     private CollectionEditor collectionEditor;
     private String userEnteredId;
@@ -52,10 +55,3 @@ public class CommandRemoveById implements CommandWithArgument {
     }
 
 }
-//    Scanner IdReader = new Scanner(System.in);
-//    String possibleId = IdReader.nextLine();
-//        try{
-//                id = Integer.parseInt(possibleId);
-//                } catch (NumberFormatException e){
-//                return  "\"" + possibleId + "\" is not a number ";
-//                }
