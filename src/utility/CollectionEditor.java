@@ -112,14 +112,14 @@ public class CollectionEditor {
         } else {
             String res = "Collection of vehicle: ";
             for (Vehicle collectionElement : collection) {
-                res += "\nname          | " + collectionElement.getName() +
-                        "\nid            | " + collectionElement.getId() +
-                        "\nxCoordinate   | " + collectionElement.getCoordinates().getX() +
-                        "\nyCoordinate   | " + collectionElement.getCoordinates().getY() +
-                        "\nenginePower   | " + collectionElement.getEnginePower() +
-                        "\nVehicleType   | " + collectionElement.getType() +
-                        "\nFuelType      | " + collectionElement.getFuelType() +
-                        "\ninitialization time | " + DateTimeFormatter.ISO_DATE_TIME.format(collectionElement.getCreationDate()) +
+                res += "\nname          ¯\\_(ツ)_/¯ " + collectionElement.getName() +
+                        "\nid            ¯\\_(ツ)_/¯ " + collectionElement.getId() +
+                        "\nxCoordinate   ¯\\_(ツ)_/¯ " + collectionElement.getCoordinates().getX() +
+                        "\nyCoordinate   ¯\\_(ツ)_/¯ " + collectionElement.getCoordinates().getY() +
+                        "\nenginePower   ¯\\_(ツ)_/¯ " + collectionElement.getEnginePower() +
+                        "\nVehicleType   ¯\\_(ツ)_/¯ " + collectionElement.getType() +
+                        "\nFuelType      ¯\\_(ツ)_/¯ " + collectionElement.getFuelType() +
+                        "\ninitialization time ¯\\_(ツ)_/¯ " + DateTimeFormatter.ISO_DATE_TIME.format(collectionElement.getCreationDate()) +
                         "\n--------------------------";
 
             }
