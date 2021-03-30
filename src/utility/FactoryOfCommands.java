@@ -14,24 +14,11 @@ import java.util.*;
 
 public class FactoryOfCommands {
 
-    static ArrayList<Command> commandsList;
-    static LinkedList<Vehicle> list;
-    static FileManager<Vehicle> fileManager;
+    private ArrayList<Command> commandsList;
+    private FileManager<Vehicle> fileManager;
 
-    static {
+    public FactoryOfCommands(){
         commandsList = new ArrayList<>();
-        list = new LinkedList<>();
-        fileManager = new FileManager<>("LAB5", list, new TypeToken<LinkedList<Vehicle>>() {
-        }.getType());
-        try {
-            list = fileManager.readCollection();
-        } catch (NoReadPermissionException | FileNotFoundException e) {
-            //...
-        }
-    }
-
-    {
-        commandsList.clear();
     }
 
     /**
@@ -43,7 +30,7 @@ public class FactoryOfCommands {
      */
     public ArrayList<Command> getCommandList(Scanner scanner) {
 
-        CollectionEditor collectionEditor = new CollectionEditor(list);
+        CollectionEditor collectionEditor = new CollectionEditor();
         Command commandAverageOfEnginePower = new CommandAverageOfEnginePower(collectionEditor);
         Command clear = new CommandClear(collectionEditor);
         Command help = new CommandHelp(commandsList);
@@ -79,16 +66,20 @@ public class FactoryOfCommands {
         return commandsList;
     }
 
-    public String getStatusOfLoadFile(){
-        LinkedList<Vehicle> list = new LinkedList<>();
-        FileManager<Vehicle> fileManager = new FileManager<>("LAB5", list, new TypeToken<LinkedList<Vehicle>>() {
+    /**
+     * checking is anything wrong with a file
+     *
+     * @note this line will also apear when you execute script (it's not a bug, it's a feature)
+     */
+    public String getStatusOfLoadFile() {
+        FileManager<Vehicle> fileManager = new FileManager<>("LAB5", new TypeToken<LinkedList<Vehicle>>() {
         }.getType());
         try {
-            list = fileManager.readCollection();
+            fileManager.readCollection();
             return "collection was successfully load from a file";
         } catch (NoReadPermissionException e) {
             return "unable to load collection from a file due to absence read right";
-        } catch (FileNotFoundException e){
+        } catch (FileNotFoundException e) {
             return "collection wasn't load, because file not found";
         }
     }

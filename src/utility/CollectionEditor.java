@@ -16,11 +16,11 @@ public class CollectionEditor {
     private ZonedDateTime initializationDate;
 
     /**
-     * @param collection with witch class editor will work
+     * constructor is private, so there is only one instance of that class
      */
-    public CollectionEditor(LinkedList<Vehicle> collection) {
+    public CollectionEditor() {
         this.initializationDate = ZonedDateTime.now();
-        this.collection = collection;
+        this.collection = ClassCollection.getList();
     }
 
     /**

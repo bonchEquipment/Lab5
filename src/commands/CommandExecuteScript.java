@@ -91,6 +91,12 @@ public class CommandExecuteScript implements CommandWithArgument {
         }
     }
 
+
+    /**
+     * this is got to wrong algorithm, but it works perfectly (I have no idea why)
+     * @param path
+     * @return
+     */
     private boolean isThePathHaveRecursion(String path) {
         ArrayList<String> linesCollection = getLinesCollectionFromFile(path);
         if (isStringCollectionHaveSameElements(paths)) {

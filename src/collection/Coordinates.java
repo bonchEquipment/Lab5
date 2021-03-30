@@ -1,5 +1,8 @@
 package collection;
 
+import annotations.GreaterThan;
+import annotations.NotNull;
+
 /**
  * class for pointing the location of an object in space
  */
@@ -10,7 +13,10 @@ public class Coordinates {
         this.y = y;
     }
 
+    @NotNull
+    @GreaterThan(-958)
     private Float x; //Значение поля должно быть больше -958, Поле не может быть null
+    @NotNull
     private Float y; //Поле не может быть null
 
     public Float getX() {

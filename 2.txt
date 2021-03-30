@@ -1,16 +1,2 @@
-show
-execute_script ScriptFile.txt
-help
-add
-woooooow
-100
-100
-100
-chopper
-plasma
-show
-123123123
-exit
 
-add
-11
+remove_by_id 2

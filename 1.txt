@@ -1,8 +1,9 @@
+show
 add
-1
-1
-1
-1
-chopper
+name
+100
+110
+120
+
 plasma
 show

@@ -12,14 +12,10 @@ import java.io.*;
  */
 public class FileManager<T> {
     private String path;
-    private ConsoleOutputSystem outputSystem;
-    private Collection<T> collection;
     private Type typeToken;
 
-    public FileManager(String envVariable, Collection<T> collection, Type typeToken) {
+    public FileManager(String envVariable, Type typeToken) {
         path = System.getenv(envVariable);
-        outputSystem = new ConsoleOutputSystem();
-        this.collection = collection;
         this.typeToken = typeToken;
     }
 
