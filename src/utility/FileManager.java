@@ -1,11 +1,13 @@
 package utility;
 
 import com.google.gson.*;
-import exceptions.*;
+import exceptions.NoReadPermissionException;
+import exceptions.NoWritePermissionException;
 
-import java.lang.reflect.*;
-import java.util.*;
 import java.io.*;
+import java.lang.reflect.Type;
+import java.util.Collection;
+import java.util.LinkedList;
 
 /**
  * Operates the file for saving/reading collection.

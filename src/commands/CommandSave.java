@@ -31,9 +31,9 @@ public class CommandSave implements Command {
             fileManager.saveCollectionInFile(collectionEditor.getCollection());
             return "collection was saved";
         } catch (FileNotFoundException e){
-           return "file not found";
+           return "not possible to save collection because file not found";
         } catch (NoWritePermissionException e){
-            return "no write rights";
+            return "not possible to save collection because no write rights";
         }
     }
 

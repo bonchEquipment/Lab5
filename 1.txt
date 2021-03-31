@@ -7,3 +7,4 @@ name
 
 plasma
 show
+execute_script 2.txt

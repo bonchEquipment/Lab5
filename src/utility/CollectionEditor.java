@@ -96,9 +96,10 @@ public class CollectionEditor {
      * @param id of element you want to remove
      */
     public void removeById(int id) {
-        for (Vehicle collectionElement : collection) {
-            if (collectionElement.getId() == id) {
-                collection.remove(collectionElement);
+        Iterator<Vehicle> iterator = collection.iterator();
+        while (iterator.hasNext()){
+            if (iterator.next().getId() == id){
+                iterator.remove();
             }
         }
     }

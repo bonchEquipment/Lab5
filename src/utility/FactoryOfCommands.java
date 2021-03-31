@@ -19,6 +19,7 @@ public class FactoryOfCommands {
 
     public FactoryOfCommands(){
         commandsList = new ArrayList<>();
+        this.fileManager = new FileManager<Vehicle>("LAB5",new TypeToken<LinkedList<Vehicle>>(){}.getType());
     }
 
     /**
@@ -69,7 +70,7 @@ public class FactoryOfCommands {
     /**
      * checking is anything wrong with a file
      *
-     * @note this line will also apear when you execute script (it's not a bug, it's a feature)
+     * @note this line will also appears when you execute script (it's not a bug, it's a feature)
      */
     public String getStatusOfLoadFile() {
         FileManager<Vehicle> fileManager = new FileManager<>("LAB5", new TypeToken<LinkedList<Vehicle>>() {
