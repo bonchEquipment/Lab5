@@ -36,7 +36,7 @@ public class CollectionEditor {
             }
             float averageEnginePower = sumOfEnginePowers / amountOfElements;
             return "average engine power of all vehicle in a collection: " +
-                    String.valueOf(averageEnginePower) + "\n";
+                    String.valueOf(averageEnginePower);
         } else {
             return "unable to count average engine power because collection is empty";
         }
@@ -65,8 +65,7 @@ public class CollectionEditor {
                 "\nsize                 | " + size +
                 "\ninitializationDate   | " + initializationDate +
                 "\ntype of collection   | " + type +
-                "\nstored type          | " + storedType +
-                "\n";
+                "\nstored type          | " + storedType;
         return res;
 
     }

@@ -19,7 +19,7 @@ public class CommandRemoveById implements CommandWithArgument {
         if (isArgumentANumber(userEnteredId)) {
             if (collectionEditor.isThereAnElementWithSuchId(id)) {
                 collectionEditor.removeById(id);
-                return "element with id " + id + " was successfully deleted\n";
+                return "element with id " + id + " was successfully deleted";
             } else {
                 return "unable to find element with id " + id;
             }

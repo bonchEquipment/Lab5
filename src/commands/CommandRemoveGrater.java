@@ -18,7 +18,7 @@ public class CommandRemoveGrater implements CommandWithArgument {
     public String execute() {
         if (isArgumentANumber(userEnteredId)) {
             if (collectionEditor.removeElementsWithGraterId(id)) {
-                return "all elements with id greater that " + userEnteredId + " was successfully deleted\n";
+                return "all elements with id greater that " + userEnteredId + " was successfully deleted";
             } else {
                 return "there is no elements with id greater that  " + userEnteredId;
             }

@@ -16,10 +16,10 @@ public class CommandClear implements Command {
     @Override
     public String execute() {
         if (collectionEditor.isCollectionEmpty()) {
-            return "Collection is already empty\n";
+            return "Collection is already empty";
         } else {
             collectionEditor.cleanCollection();
-            return "Collection successfully was cleaned (⌒‿⌒)\n";
+            return "Collection successfully was cleaned (⌒‿⌒)";
         }
     }
 

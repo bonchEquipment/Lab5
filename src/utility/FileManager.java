@@ -31,7 +31,7 @@ public class FileManager<T> {
         if (!isFileExist(path)) {
             throw new FileNotFoundException();
         }
-        if (!isFileReadable(path)) {
+        if (!isFileWritable(path)) {
             throw new NoWritePermissionException();
         }
         try {
@@ -120,8 +120,13 @@ public class FileManager<T> {
      * @return boolean
      */
     private boolean isFileExist(String path) {
-        File file = new File(path);
-        return file.exists();
+        try{
+            File file = new File(path);
+            return file.exists();
+        } catch (NullPointerException e){//I have no idea why this is throwing
+            return false;
+        }
+
     }
 
     /**
@@ -131,8 +136,12 @@ public class FileManager<T> {
      * @return boolean
      */
     private boolean isFileWritable(String path) {
-        File file = new File(path);
-        return file.canWrite();
+        try {
+            File file = new File(path);
+            return file.canWrite();
+        } catch (NullPointerException e){//I have no idea why this is throwing
+            return false;
+        }
     }
 
     /**
